@@ -3,7 +3,7 @@
     <div v-for="(doc, key) in documents" :key="key" class="card">
       <div class="card-header">
         <div class="card-header__btn">
-          <span @click="toggleVisible(key)">{{ visible.indexOf(key) > -1 ? '▲' : '▼' }}</span>
+          <span @click="toggleVisible(key)" :class="visible.indexOf(key) > -1? 'class1' : 'class2'"></span>
         </div>
         <div class="card-header__date">{{ doc.date }}</div>
         <div class="card-header__docs">Документов: {{ doc.docs.length }} ({{ floatToPrice(doc.total) }}₽)</div>
@@ -21,7 +21,7 @@
             </div>
             <div class="card-body__item__body__body" v-show="visible.indexOf(`${key}-${iKey}`) > -1">
               <div v-for="(product, pKey) in item.products" :key="pKey" class="card-product">
-                <div class="card-product__img" :style="{ backgroundImage: `url('${product.image}')` }"></div>
+                <div class="card-product__img" :style="{ backgroundImage: `url('${product.image}'), url('/src/assets/5.png')` }"></div>
                 <div class="card-product__name">{{ product.name }}</div>
                 <div class="card-product__status">{{ product.quantity }} штук x {{ floatToPrice(product.price) }}₽</div>
                 <div class="card-product__price">{{ floatToPrice(product.quantity * product.price) }}₽</div>
@@ -44,7 +44,7 @@
     data () {
       return {
         visible: [],
-        records
+        records: records
       }
     },
 
@@ -212,4 +212,19 @@
     background-repeat: no-repeat;
     background-size: contain;
   }
+  .class1, .class2 {
+      width: 50px;
+      height: 20px;
+      display: block;
+      background-repeat: no-repeat;
+      background-size: 22px;
+      background-position: center;
+  }
+  .class1 {
+    background-image: url("assets/1.png");
+  }
+  .class2 {
+    background-image: url("assets/4.png");
+  }
+
 </style>
